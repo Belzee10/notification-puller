@@ -1,1 +1,6 @@
-alert("it works");
+import "./main.scss";
+import component from "./components/Alert";
+
+const app = document.querySelector("#app");
+
+app.appendChild(component("It works"));
