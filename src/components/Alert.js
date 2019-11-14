@@ -1,8 +1,1 @@
-export default msg => {
-  const element = document.createElement("div");
-
-  element.className = "alert alert-danger";
-  element.innerHTML = msg;
-
-  return element;
-};
+export default msg => `<div class="alert alert-danger">${msg}</div>`;

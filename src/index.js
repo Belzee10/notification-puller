@@ -1,6 +1,9 @@
 import "./main.scss";
-import component from "./components/Alert";
+import Alert from "./components/Alert";
+import Button from "./components/Button";
 
 const app = document.querySelector("#app");
 
-app.appendChild(component("It works"));
+const elements = `${Alert("I am an Alert")} ${Button()}`;
+
+app.innerHTML = elements;
