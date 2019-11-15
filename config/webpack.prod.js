@@ -5,6 +5,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackBar = require("webpackbar");
 const PurifyCSSPlugin = require("purifycss-webpack");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
 const glob = require("glob");
 
@@ -46,6 +47,7 @@ module.exports = {
     new Dotenv({
       path: ".env.production"
     }),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: "styles/[name].css" }),
     new WebpackBar({ name: "Building Production" }),
     new PurifyCSSPlugin({
