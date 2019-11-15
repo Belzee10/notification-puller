@@ -6,8 +6,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackBar = require("webpackbar");
 const PurifyCSSPlugin = require("purifycss-webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const GitRevisionPlugin = require("git-revision-webpack-plugin");
 const path = require("path");
 const glob = require("glob");
+const webpack = require("webpack");
 
 module.exports = {
   mode: "production",
@@ -47,9 +49,12 @@ module.exports = {
     new Dotenv({
       path: ".env.production"
     }),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: "styles/[name].css" }),
     new WebpackBar({ name: "Building Production" }),
+    new CleanWebpackPlugin(),
+    new webpack.BannerPlugin({
+      banner: new GitRevisionPlugin().version()
+    }),
+    new MiniCssExtractPlugin({ filename: "styles/[name].css" }),
     new PurifyCSSPlugin({
       paths: glob.sync(`${path.join(__dirname, "src")}/**/*.js`, {
         nodir: true
