@@ -9,11 +9,14 @@ const PurifyCSSPlugin = require("purifycss-webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const GitRevisionPlugin = require("git-revision-webpack-plugin");
 const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const path = require("path");
 const glob = require("glob");
 const webpack = require("webpack");
 
-module.exports = {
+const smp = new SpeedMeasurePlugin();
+
+module.exports = smp.wrap({
   mode: "production",
   devtool: "source-map",
   output: {
@@ -78,4 +81,4 @@ module.exports = {
     }),
     new DuplicatePackageCheckerPlugin()
   ]
-};
+});
