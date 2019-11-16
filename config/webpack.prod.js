@@ -15,6 +15,10 @@ const webpack = require("webpack");
 module.exports = {
   mode: "production",
   devtool: "source-map",
+  output: {
+    chunkFilename: "[name].[chunkhash:4].js",
+    filename: "[name].[chunkhash:4].js"
+  },
   optimization: {
     minimizer: [
       new OptimizeCssAssetsPlugin({
@@ -61,7 +65,7 @@ module.exports = {
     new webpack.BannerPlugin({
       banner: new GitRevisionPlugin().version()
     }),
-    new MiniCssExtractPlugin({ filename: "styles/[name].css" }),
+    new MiniCssExtractPlugin({ filename: "styles/[name].[contenthash:4].css" }),
     new PurifyCSSPlugin({
       paths: glob.sync(`${path.join(__dirname, "src")}/**/*.js`, {
         nodir: true
