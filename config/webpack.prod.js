@@ -19,6 +19,7 @@ module.exports = {
     chunkFilename: "[name].[chunkhash:4].js",
     filename: "[name].[chunkhash:4].js"
   },
+  recordsPath: path.join(__dirname, "../", "records.json"),
   optimization: {
     minimizer: [
       new OptimizeCssAssetsPlugin({
@@ -46,6 +47,9 @@ module.exports = {
           chunks: "initial"
         }
       }
+    },
+    runtimeChunk: {
+      name: "manifest"
     }
   },
   module: {
