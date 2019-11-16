@@ -1,6 +1,7 @@
 const Dotenv = require("dotenv-webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const cssnano = require("cssnano");
 const TerserPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackBar = require("webpackbar");
@@ -16,8 +17,14 @@ module.exports = {
   devtool: "source-map",
   optimization: {
     minimizer: [
-      new OptimizeCssAssetsPlugin(),
-      new TerserPlugin(),
+      new OptimizeCssAssetsPlugin({
+        cssProcessor: cssnano,
+        cssProcessorOptions: {
+          preset: ["default", { discardComments: { removeAll: true } }]
+        },
+        canPrint: false
+      }),
+      new TerserPlugin({ sourceMap: true }),
       new HtmlWebpackPlugin({
         template: "src/index.html",
         minify: {
